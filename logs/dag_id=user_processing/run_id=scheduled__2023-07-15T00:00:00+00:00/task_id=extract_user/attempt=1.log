@@ -1,0 +1,50 @@
+[2023-07-22T05:54:23.669+0000] {taskinstance.py:1165} INFO - Dependencies all met for <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [queued]>
+[2023-07-22T05:54:23.697+0000] {taskinstance.py:1165} INFO - Dependencies all met for <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [queued]>
+[2023-07-22T05:54:23.699+0000] {taskinstance.py:1362} INFO - 
+--------------------------------------------------------------------------------
+[2023-07-22T05:54:23.703+0000] {taskinstance.py:1363} INFO - Starting attempt 1 of 1
+[2023-07-22T05:54:23.703+0000] {taskinstance.py:1364} INFO - 
+--------------------------------------------------------------------------------
+[2023-07-22T05:54:23.820+0000] {taskinstance.py:1383} INFO - Executing <Task(SimpleHttpOperator): extract_user> on 2023-07-15 00:00:00+00:00
+[2023-07-22T05:54:23.847+0000] {standard_task_runner.py:55} INFO - Started process 5226 to run task
+[2023-07-22T05:54:23.943+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'user_processing', 'extract_user', 'scheduled__2023-07-15T00:00:00+00:00', '--job-id', '63', '--raw', '--subdir', 'DAGS_FOLDER/user_processing.py', '--cfg-path', '/tmp/tmpq5orawh4']
+[2023-07-22T05:54:23.964+0000] {standard_task_runner.py:83} INFO - Job 63: Subtask extract_user
+[2023-07-22T05:54:24.349+0000] {task_command.py:376} INFO - Running <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [running]> on host ef71d3f52879
+[2023-07-22T05:54:24.665+0000] {taskinstance.py:1592} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=user_processing
+AIRFLOW_CTX_TASK_ID=extract_user
+AIRFLOW_CTX_EXECUTION_DATE=2023-07-15T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-07-15T00:00:00+00:00
+[2023-07-22T05:54:24.667+0000] {http.py:121} INFO - Calling HTTP method
+[2023-07-22T05:54:24.691+0000] {base.py:71} INFO - Using connection ID 'user_api' for task execution.
+[2023-07-22T05:54:24.696+0000] {http.py:148} INFO - Sending 'GET' to url: https://randomuser.me/api/
+[2023-07-22T05:54:25.744+0000] {taskinstance.py:1406} INFO - Marking task as SUCCESS. dag_id=user_processing, task_id=extract_user, execution_date=20230715T000000, start_date=20230722T055423, end_date=20230722T055425
+[2023-07-22T05:54:26.047+0000] {local_task_job.py:164} INFO - Task exited with return code 0
+[2023-07-22T05:54:26.568+0000] {local_task_job.py:273} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-07-22T05:57:01.610+0000] {taskinstance.py:1165} INFO - Dependencies all met for <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [queued]>
+[2023-07-22T05:57:01.678+0000] {taskinstance.py:1165} INFO - Dependencies all met for <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [queued]>
+[2023-07-22T05:57:01.684+0000] {taskinstance.py:1362} INFO - 
+--------------------------------------------------------------------------------
+[2023-07-22T05:57:01.685+0000] {taskinstance.py:1363} INFO - Starting attempt 1 of 1
+[2023-07-22T05:57:01.685+0000] {taskinstance.py:1364} INFO - 
+--------------------------------------------------------------------------------
+[2023-07-22T05:57:01.963+0000] {taskinstance.py:1383} INFO - Executing <Task(SimpleHttpOperator): extract_user> on 2023-07-15 00:00:00+00:00
+[2023-07-22T05:57:02.006+0000] {standard_task_runner.py:55} INFO - Started process 5513 to run task
+[2023-07-22T05:57:02.032+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'user_processing', 'extract_user', 'scheduled__2023-07-15T00:00:00+00:00', '--job-id', '119', '--raw', '--subdir', 'DAGS_FOLDER/user_processing.py', '--cfg-path', '/tmp/tmpogg8etlg']
+[2023-07-22T05:57:02.041+0000] {standard_task_runner.py:83} INFO - Job 119: Subtask extract_user
+[2023-07-22T05:57:02.422+0000] {task_command.py:376} INFO - Running <TaskInstance: user_processing.extract_user scheduled__2023-07-15T00:00:00+00:00 [running]> on host ef71d3f52879
+[2023-07-22T05:57:02.788+0000] {taskinstance.py:1592} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=user_processing
+AIRFLOW_CTX_TASK_ID=extract_user
+AIRFLOW_CTX_EXECUTION_DATE=2023-07-15T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-07-15T00:00:00+00:00
+[2023-07-22T05:57:02.792+0000] {http.py:121} INFO - Calling HTTP method
+[2023-07-22T05:57:02.824+0000] {base.py:71} INFO - Using connection ID 'user_api' for task execution.
+[2023-07-22T05:57:02.829+0000] {http.py:148} INFO - Sending 'GET' to url: https://randomuser.me/api/
+[2023-07-22T05:57:03.680+0000] {taskinstance.py:1406} INFO - Marking task as SUCCESS. dag_id=user_processing, task_id=extract_user, execution_date=20230715T000000, start_date=20230722T055701, end_date=20230722T055703
+[2023-07-22T05:57:03.879+0000] {local_task_job.py:164} INFO - Task exited with return code 0
+[2023-07-22T05:57:03.981+0000] {local_task_job.py:273} INFO - 1 downstream tasks scheduled from follow-on schedule check
