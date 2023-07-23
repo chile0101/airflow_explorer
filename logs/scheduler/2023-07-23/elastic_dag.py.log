@@ -1,0 +1,22 @@
+[2023-07-23T07:01:21.987+0000] {processor.py:154} INFO - Started process (PID=83234) to work on /opt/airflow/dags/elastic_dag.py
+[2023-07-23T07:01:21.988+0000] {processor.py:756} INFO - Processing file /opt/airflow/dags/elastic_dag.py for tasks to queue
+[2023-07-23T07:01:21.989+0000] {logging_mixin.py:120} INFO - [2023-07-23T07:01:21.989+0000] {dagbag.py:537} INFO - Filling up the DagBag from /opt/airflow/dags/elastic_dag.py
+[2023-07-23T07:01:22.417+0000] {logging_mixin.py:120} INFO - [2023-07-23T07:01:22.414+0000] {dagbag.py:342} ERROR - Failed to import: /opt/airflow/dags/elastic_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 338, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/elastic_dag.py", line 14, in <module>
+    python_callable=_print_es_info()
+  File "/opt/airflow/dags/elastic_dag.py", line 8, in _print_es_info
+    hook = ElasticHook()
+  File "/opt/airflow/plugins/hooks/elastic/elastic_hook.py", line 10, in __init__
+    conn = self.get_connection(conn_id)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/hooks/base.py", line 70, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/connection.py", line 432, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `elastic_default` isn't defined
+[2023-07-23T07:01:22.417+0000] {processor.py:768} WARNING - No viable dags retrieved from /opt/airflow/dags/elastic_dag.py
+[2023-07-23T07:01:22.423+0000] {processor.py:176} INFO - Processing /opt/airflow/dags/elastic_dag.py took 0.440 seconds
