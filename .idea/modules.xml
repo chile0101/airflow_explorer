@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/materials.iml" filepath="$PROJECT_DIR$/.idea/materials.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../airflow_explorer/.idea/airflow_explorer.iml" filepath="$PROJECT_DIR$/../airflow_explorer/.idea/airflow_explorer.iml" />
     </modules>
   </component>
 </project>

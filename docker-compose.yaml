@@ -24,7 +24,7 @@
 # The following variables are supported:
 #
 # AIRFLOW_IMAGE_NAME           - Docker image name used to run Airflow.
-#                                Default: apache/airflow:2.5.1
+#                                Default: apache/airflow_explorer:2.5.1
 # AIRFLOW_UID                  - User ID in Airflow containers
 #                                Default: 50000
 # AIRFLOW_PROJ_DIR             - Base path to which all the files will be volumed.
@@ -32,9 +32,9 @@
 # Those configurations are useful mostly in case of standalone testing/running Airflow in test/try-out mode
 #
 # _AIRFLOW_WWW_USER_USERNAME   - Username for the administrator account (if requested).
-#                                Default: airflow
+#                                Default: airflow_explorer
 # _AIRFLOW_WWW_USER_PASSWORD   - Password for the administrator account (if requested).
-#                                Default: airflow
+#                                Default: airflow_explorer
 # _PIP_ADDITIONAL_REQUIREMENTS - Additional PIP requirements to add when starting all containers.
 #                                Default: ''
 #
@@ -45,24 +45,24 @@ x-airflow-common: &airflow-common
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.5.1}
+  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow_explorer:2.5.1}
   # build: .
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
-    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_explorer:airflow_explorer@postgres/airflow_explorer
     # For backward compatibility, with Airflow <2.3
-    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_explorer:airflow_explorer@postgres/airflow_explorer
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow_explorer:airflow_explorer@postgres/airflow_explorer
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__FERNET_KEY: ""
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
     AIRFLOW__CORE__LOAD_EXAMPLES: "true"
-    AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session"
+    AIRFLOW__API__AUTH_BACKENDS: "airflow_explorer.api.auth.backend.basic_auth,airflow_explorer.api.auth.backend.session"
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
   volumes:
-    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
-    - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
-    - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow_explorer/dags
+    - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow_explorer/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow_explorer/plugins
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on: &airflow-common-depends-on
     redis:
@@ -76,13 +76,13 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow_explorer
+      POSTGRES_PASSWORD: airflow_explorer
+      POSTGRES_DB: airflow_explorer
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "airflow"]
+      test: ["CMD", "pg_isready", "-U", "airflow_explorer"]
       interval: 5s
       retries: 5
     restart: always
@@ -121,7 +121,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"',
+          'airflow_explorer jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"',
         ]
       interval: 10s
       timeout: 10s
@@ -138,7 +138,7 @@ services:
     healthcheck:
       test:
         - "CMD-SHELL"
-        - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+        - 'celery --app airflow_explorer.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
       interval: 10s
       timeout: 10s
       retries: 5
@@ -160,7 +160,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"',
+          'airflow_explorer jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"',
         ]
       interval: 10s
       timeout: 10s
@@ -242,8 +242,8 @@ services:
       <<: *airflow-common-env
       _AIRFLOW_DB_UPGRADE: "true"
       _AIRFLOW_WWW_USER_CREATE: "true"
-      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
-      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow_explorer}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow_explorer}
       _PIP_ADDITIONAL_REQUIREMENTS: ""
     user: "0:0"
     volumes:
@@ -260,7 +260,7 @@ services:
     command:
       - bash
       - -c
-      - airflow
+      - airflow_explorer
 
   # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # or by explicitly targeted on the command line e.g. docker-compose up flower.
